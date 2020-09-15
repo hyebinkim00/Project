@@ -6,6 +6,9 @@ create table member(
 
 ALTER TABLE member add fuel varchar2(20);
 
+ALTER TABLE member add carPrice varchar2(30);
+ALTER TABLE member add monthPrice varchar2(30);
+
 ALTER TABLE member add cartype varchar2(20);
 ALTER TABLE member add carnum varchar2(20);
 
@@ -25,7 +28,9 @@ select * from member where fuel='휘발유' or fuel='LPG';
 update MEMBER set fuel='LPG' where id='77-77';
 update MEMBER set cartype='중형' where id='66-66';
 
-update MEMBER set carnum='3' where facname='기아';
+update MEMBER set carPrice='22,770,00원' where carnum='아반떼';
+update MEMBER set monthPrice='423,000원~' where carnum='아반떼';
+
 
 select * from member where facname='기아' ;
 select * from board;

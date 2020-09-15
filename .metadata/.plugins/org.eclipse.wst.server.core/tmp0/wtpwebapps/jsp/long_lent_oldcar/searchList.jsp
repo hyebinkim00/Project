@@ -453,9 +453,9 @@ select * from member where fuel=? or fuel=?
     </div>
     <div class="card-body">
       <a class="card-title" style="border:1px solid">소비자가 </a>
-      <a >14,860,000원</a>
+      <a ><c:out value="${row.carPrice }"></c:out></a>
       <a class="card-title" style="border:1px solid red"><span style="color:red"><strong>월 렌탈료</strong></span></a>
-      <a >&nbsp;&nbsp; <span style="color:red"><strong>346,000원~</strong></span></a>
+      <a >&nbsp;&nbsp; <span style="color:red"><strong><c:out value="${row.monthPrice }"></c:out></strong></span></a>
      
       <hr style="border:1px solid"></hr>
       <div class="row">
