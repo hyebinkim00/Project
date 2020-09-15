@@ -1,0 +1,42 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+ <%@include file="dbconn.jsp" %>
+ 
+ <%request.setCharacterEncoding("utf-8");
+ String[] test= request.getParameterValues("example1");
+ 
+
+ for(String testt :test){
+	 String test1=testt;
+	 out.print(test1+"<br>");
+
+ResultSet rs=null;
+PreparedStatement pstmt=null;
+try{
+	String sql="select * from member where fuel=?";
+	pstmt = con.prepareStatement(sql); 
+ 	pstmt.setString(1,test1);
+	rs=pstmt.executeQuery();
+	
+	 while(rs.next()){
+		String id=rs.getString("id");
+		String carname=rs.getString("carname");
+		String facname=rs.getString("facname");
+	
+	%>	
+		<%=id %>
+		<%=facname%><br>
+		
+		
+		
+		<%
+		
+	}
+}catch(Exception e){
+	e.getStackTrace();
+}
+
+ }
+
+
+ %>

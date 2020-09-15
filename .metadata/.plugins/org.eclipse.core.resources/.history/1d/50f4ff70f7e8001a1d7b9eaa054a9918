@@ -1,0 +1,39 @@
+<%@page import="javax.sql.DataSource"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<%@page import="javax.naming.*"%>
+<%@page import="java.sql.*" %>
+
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
+<%
+   Connection conn = null;
+   String sql = "select * from member";
+   try{
+      Context init = new InitialContext();
+    DataSource ds = (DataSource)init.lookup("java:comp/env/jdbc/OracleDB");
+      conn = ds.getConnection();
+      PreparedStatement stmt = conn.prepareStatement(sql);
+      ResultSet rs = stmt.executeQuery();
+       
+      while(rs.next()){
+          out.println("<h3>"+rs.getInt(1)+","+rs.getString(2)+"</h3>");
+      }
+      rs.close();
+
+   }catch(Exception e){
+      out.println("<h3>가져오는데 실패했습니다.</h3>");
+      e.printStackTrace();
+   }
+%>   
+
+
+</body>
+</html>
