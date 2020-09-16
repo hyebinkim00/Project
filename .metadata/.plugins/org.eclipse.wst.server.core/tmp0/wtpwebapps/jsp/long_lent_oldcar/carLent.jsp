@@ -84,6 +84,25 @@ border: 1px solid red;}
 
 		}
 </script>
+
+<script type="text/javascript">
+
+		function checkTest4() {
+
+			let testValue = document.getElementById("cntrTermMm4").value;
+			
+			
+					
+			document.getElementById("price").innerHTML ='모닝';
+			
+			let c=document.getElementById("price").value;
+			
+			alert(c);
+		}
+</script>	
+	
+	
+	
 	
 	<div class="jumbotron">
 		<div class="container">
@@ -198,32 +217,67 @@ border: 1px solid red;}
 						<td colspan="3"></td>
 					</tr>
 				</table>
+				<c:set var="car_price" value="${row.carprice }"> </c:set>
 				</c:forEach>
-			</div>
+			</div> 
+			
+			
 		</div>
 
-
+<div>
 <h4> 렌트 조건 선택 </h4>
 <hr style="border: solid 1px black " /> 
 
-<button class="accordion">계약 기간: &nbsp;&nbsp;&nbsp;<span id="result1"></span></button>
+
+<form method="post" action="NewFile.jsp" >
+
+<input type="hidden" id="car" name="car" value="${param.carname}">
+<button type="button" class="accordion">계약 기간: &nbsp;&nbsp;&nbsp;<span id="result1"></span></button>
 <div class="panel"><span>차량 운행할수 있는 총 대여기간: &nbsp; &nbsp; &nbsp; &nbsp;</span>
-<select name="cntrTermMm" id="cntrTermMm1" class="option01" onchange="checkTest1()" >
+<select name="cntrTermMm1" id="cntrTermMm1" class="option01" onchange="checkTest1()" >
 <option value="1개월">1개월</option>	
 <option value="2개월">2개월</option>	
 <option value="3개월">3개월</option>
 <option value="4개월">4개월</option>
-<option value="5개월">5개월</option></select>
+<option value="5개월">5개월</option>
+</select>
 </div>
 
-<button class="accordion">약정 주행거리  <span id="result2"></span></button> 
+<button type="button" class="accordion">보험조건  <span id="result2"></span></button> 
 <div class="panel"><span>계약기간 총 주행거리 초과 시 위약금 발생   </span>
-<select  name="cntrTermMm" id="cntrTermMm2" class="option01" onchange="checkTest2()" >
+<select  name="cntrTermMm2" id="cntrTermMm2"  class="option02" onchange="checkTest2()" >
 <option value="월 2천 Km이하">월 2천 Km이하</option>	
 <option value="월 3천 Km이하">월 3천 Km이하</option>	
 <option value="월 4천 Km이하">월 4천 Km이하</option>
 </select>
 </div>
+
+<button type="button" class="accordion">사고시 차량 대여  <span id="result3"></span></button> 
+<div class="panel"><span>사고 시 차량 대여 서비스  </span>
+<select  name="cntrTermMm3" id="cntrTermMm3"  class="option03"  >
+<option value="yes">포함</option>	
+<option value="no">불 포함</option>	
+</select>
+</div>
+
+<button type="button" class="accordion">초기 납부 조건  <span id="result4"></span></button> 
+<div class="panel"><span>할인 조건  </span>
+<select  name="cntrTermMm4" id="cntrTermMm4"  class="option04" >
+<option value="5%">5% 할인</option>	
+<option value="10%">10%할인</option>	
+
+</select>
+<input type="hidden" id="price" name="price" value="${car_price}">
+</div>
+
+
+<input type="submit" value="전송">
+</form>
+<c:remove var="car_price"/>
+</div>
+
+
+
 
 <table class="table talbe-hover">
 <tr><td>보험 조건</td><td>연령: 만 21세 이상, 대물:2천, 자손:1.5천 무보험: 2억</td></tr>
@@ -243,6 +297,9 @@ border: 1px solid red;}
 </ul>
 
 </div>
+
+
+
 
 </div>
 

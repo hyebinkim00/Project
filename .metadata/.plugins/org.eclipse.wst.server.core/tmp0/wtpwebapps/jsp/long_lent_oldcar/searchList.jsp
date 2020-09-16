@@ -10,9 +10,8 @@ String facname1 =request.getParameter("sellist1");
 String cartype1 =request.getParameter("sellist2"); 
 String carnum1 =request.getParameter("sellist3"); 
 
-String checkBoxes[] =request.getParameterValues("example1"); 
-
-
+String checkBoxes1[] =request.getParameterValues("example1"); 
+String chekcBoxex2[] =request.getParameterValues("example2");
 %>
 <!DOCTYPE html>
 <html>
@@ -33,7 +32,9 @@ $(document).ready(function(){
 		alert(cont);
 		let cont5=$("input:checkbox[name=example1]:checked").val();
 		alert(cont5);
-		if(cont5=='전체'){$('input[type="checkbox"]').not(this).prop("disabled", "disabled");
+		if(cont5=='전체'){$("input:checkbox[name=example1]").not(this).prop("disabled", "disabled");
+		$("input:checkbox[name=example1]").not(this).prop("checked", false);
+		
 		}else {
 	            $("input[name=example1]:checkbox").prop("disabled",false);
 	        }
@@ -48,10 +49,33 @@ $(document).ready(function(){
 	});	
 	
 });
-
-
 </script>
 
+<script>
+$(document).ready(function(){
+	$("input:checkbox[name=example2]").on("click",function(){
+		let cont=$("input:checkbox[name=example2]:checked").length;
+		alert(cont);
+		let cont5=$("input:checkbox[name=example2]:checked").val();
+		alert(cont5);
+		if(cont5=='전체'){$("input:checkbox[name=example2]").not(this).prop("disabled", "disabled");
+		$("input:checkbox[name=example2]").not(this).prop("checked", false);
+		
+		}else {
+	            $("input[name=example2]:checkbox").prop("disabled",false);
+	        }
+
+
+		
+		if(cont>2){
+			$(this).prop("checked", false);
+			alert("2개이상 선택 불가능 ");
+		}
+		
+	});	
+	
+});
+</script>
 </head>
 <body>
 <script>
@@ -249,6 +273,7 @@ if(checked==0){
     <span class="col-sm-1"><strong>연료 :</strong></span>
   
      <div class="col-sm-8">
+      <span class="col-sm-1">&nbsp;&nbsp;&nbsp;</span> 
      <c:if test="${not empty paramValues.example1 }">
      
      <c:set var="ff" value="${paramValues.example1[0]}"/>
@@ -282,45 +307,56 @@ if(checked==0){
   </div>
   
  
-  </form>
+
   
   
   <br>
   
-   <form method="post" onsubmit="fchk1();">
+
      <div class="row">
      <span class="col-sm-1">&nbsp;&nbsp;&nbsp;</span> 
     <span class="col-sm-1"><strong>지점 :</strong></span>
+    
     <div class="col-sm-8">
      <span class="col-sm-1">&nbsp;&nbsp;&nbsp;</span> 
+       <c:if test="${not empty paramValues.example2 }">
+     
+     <c:set var="dd" value="${paramValues.example2[0]}"/>
+     <c:set var="dd1" value="${paramValues.example2[1]}"/>
+      </c:if>
     <div class="form-check-inline">
-       <input  type="checkbox" value="전체" name="example2"><strong>&nbsp;전체&nbsp;</strong>
-     <!--  <label class="custom-control-label" for="customRadio7"><strong>&nbsp;전체&nbsp;</strong></label> -->
+       <input <c:if test="${dd=='전체' or dd1=='전체'}">checked</c:if> type="checkbox" value="전체" name="example2"><strong>&nbsp;전체&nbsp;</strong>
     </div>
+ 
     <div class="form-check-inline">
-      <input type="checkbox" value="서울" name="example2"><strong>&nbsp;서울&nbsp;</strong>
-      <!-- <label class="custom-control-label" for="customRadio8"><strong>&nbsp;서울&nbsp;</strong></label> -->
+      <input  <c:if test="${dd=='서울' or dd1=='서울'}">checked</c:if> type="checkbox" value="서울" name="example2"><strong>&nbsp;서울&nbsp;</strong>
     </div>
+    
      <div class="form-check-inline">
-      <input type="checkbox" value="경기" name="example2"><strong>&nbsp;경기&nbsp;</strong>
-<!--       <label class="custom-control-label" for="customRadio9"><strong>&nbsp;경기&nbsp;</strong></label> -->
+      <input  <c:if test="${dd=='경기' or dd1=='경기'}">checked</c:if> type="checkbox" value="경기" name="example2"><strong>&nbsp;경기&nbsp;</strong>
     </div>
+    
      <div class="form-check-inline">
-      <input type="checkbox" value="충청" name="example2"><strong>&nbsp;충청&nbsp;</strong>
-     <!--  <label class="custom-control-label" for="customRadio10"><strong>&nbsp;충청&nbsp;</strong></label> -->
+      <input  <c:if test="${dd=='충청' or dd1=='충청'}">checked</c:if> type="checkbox" value="충청" name="example2"><strong>&nbsp;충청&nbsp;</strong>
     </div>
+    
     <div class="form-check-inline">
-      <input type="checkbox" value="강원" name="example2"><strong>&nbsp;강원&nbsp;</strong>
- <!--      <label class="custom-control-label" for="customRadio11"><strong>&nbsp;강원&nbsp;</strong></label> -->
+      <input <c:if test="${dd=='강원' or dd1=='강원'}">checked</c:if> type="checkbox" value="강원" name="example2"><strong>&nbsp;강원&nbsp;</strong>
     </div>
+    
     <div class="form-check-inline">
-      <input type="checkbox" value="경상" name="example2"><strong>&nbsp;경상&nbsp;</strong>
-   <!--    <label class="custom-control-label" for="customRadio12"><strong>&nbsp;경상&nbsp;</strong></label> -->
+      <input <c:if test="${dd=='경상' or dd1=='경상'}">checked</c:if> type="checkbox" value="경상" name="example2"><strong>&nbsp;경상&nbsp;</strong>
     </div>
+    
+    <div class="form-check-inline">
+      <input <c:if test="${dd=='제주' or dd1=='제주'}">checked</c:if> type="checkbox" value="제주" name="example2"><strong>&nbsp;제주&nbsp;</strong>
+    </div>
+     <c:remove var="dd"/>
+    <c:remove var="dd1"/>
     </div>
     <input type="submit" value="검색" class="col-sm-1">
   </div>
-  </form>
+    </form>
   
   
   </div>
@@ -347,93 +383,302 @@ if(checked==0){
 <sql:query var="resultSet" dataSource="${dataSource}">
 			select * from member
 			</sql:query>
-
-
-  <c:if test="${not empty paramValues.example1 }">
- <c:set var="ff" value="${paramValues.example1[0]}"/>
-     <c:set var="ff1" value="${paramValues.example1[1]}"/>
+			
+<c:if test="${not empty paramValues.example1 and empty paramValues.example2}">
+ 	<c:set var="ff" value="${paramValues.example1[0]}"/>
+    <c:set var="ff1" value="${paramValues.example1[1]}"/>
 <sql:query var="resultSet" dataSource="${dataSource}">
 select * from member where fuel=? or fuel=?
-
  <sql:param value="${ff}"/>
  <sql:param value="${ff1}"/>
-
 </sql:query>  
   
-
  <c:if test="${ff=='전체'}">
 		<sql:query var="resultSet" dataSource="${dataSource}">
 			select * from member
 			</sql:query> 
   </c:if>
-  
-
 
 </c:if>
-			
+
+  <c:if test="${empty paramValues.example1 and  not empty paramValues.example2 }">
+ 
+ <c:set var="dd" value="${paramValues.example2[0]}"/>
+     <c:set var="dd1" value="${paramValues.example2[1]}"/>
+<sql:query var="resultSet" dataSource="${dataSource}">
+select * from member where lentoffice=? or lentoffice=?
+
+ <sql:param value="${dd}"/>
+ <sql:param value="${dd1}"/>
+
+</sql:query>  
+  
+ <c:if test="${dd=='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+			select * from member
+			</sql:query> 
+  </c:if>
+
+</c:if>
+
+  <c:if test="${not empty paramValues.example1 and not empty paramValues.example2}">
+ <c:set var="ff" value="${paramValues.example1[0]}"/>
+     <c:set var="ff1" value="${paramValues.example1[1]}"/>
+      <c:set var="dd" value="${paramValues.example2[0]}"/>
+     <c:set var="dd1" value="${paramValues.example2[1]}"/>
+     
+<sql:query var="resultSet" dataSource="${dataSource}">
+select * from (select * from member where fuel=? or fuel=?) where lentoffice=? or lentoffice=? 
+
+
+ <sql:param value="${ff}"/>
+ <sql:param value="${ff1}"/>
+  <sql:param value="${dd}"/>
+ <sql:param value="${dd1}"/>
+</sql:query>  
+  
+
+ <c:if test="${ff=='전체' and dd=='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+			select * from member
+			</sql:query> 
+  </c:if>
+  
+  <c:if test="${ff=='전체' and dd!='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+			select * from member where lentoffice=? or lentoffice=?
+			  <sql:param value="${dd}"/>
+ 			<sql:param value="${dd1}"/>
+			</sql:query> 
+  </c:if>
+    <c:if test="${ff!='전체' and dd=='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+			select * from member where fuel=? or fuel=?
+			<sql:param value="${ff}"/>
+ 			<sql:param value="${ff1}"/>
+			</sql:query> 
+  </c:if>
+  
+
+</c:if>	
 </c:when>
 
-	<c:when test="${empty paramValues.example1 and not empty param.sellist3}">
+	<c:when test="${empty paramValues.example1 and not empty param.sellist3 and not empty paramValues.example2}">
+
 	<sql:query var="resultSet" dataSource="${dataSource}">
-	select * from member where facname=? and cartype=? and carnum=? 
+	<c:set var="dd" value="${paramValues.example2[0]}"/>
+     <c:set var="dd1" value="${paramValues.example2[1]}"/>
+	select * from member where facname=? and cartype=? and carnum=? and lentoffice=? or lentoffice=?
 	<sql:param value="${param.sellist1}"></sql:param>
 	<sql:param value="${param.sellist2}"></sql:param>
-	<sql:param value="${param.sellist3}"></sql:param>		
+	<sql:param value="${param.sellist3}"></sql:param>
+	 <sql:param value="${dd}"/>
+	  <sql:param value="${dd1}"/>
 	</sql:query>
-	<c:if test="${param.sellist2=='all'}">
+	
+	
+	<c:if test="${param.sellist2=='all' and dd!='전체'}">
+	<sql:query var="resultSet" dataSource="${dataSource}">
+	select * from member where facname=? and carnum=? and lentoffice=? or lentoffice=?
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>	
+	<sql:param value="${dd}"/>
+	  <sql:param value="${dd1}"/>
+	</sql:query>
+	</c:if>
+	
+	 <c:if test="${param.sellist2!='all' and  dd=='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+		select * from member where facname=? and cartype=? and carnum=? 
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist2}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>
+			</sql:query> 
+  </c:if>
+  
+  <c:if test="${param.sellist2=='all' and dd=='전체'}">
 	<sql:query var="resultSet" dataSource="${dataSource}">
 	select * from member where facname=? and carnum=?
 	<sql:param value="${param.sellist1}"></sql:param>
-	<sql:param value="${param.sellist3}"></sql:param>		
+	<sql:param value="${param.sellist3}"></sql:param>	
+	
+	</sql:query>
+	</c:if>
+	
+</c:when>
+
+	<c:when test="${empty paramValues.example1 and not empty param.sellist3 and empty paramValues.example2}">
+
+	<sql:query var="resultSet" dataSource="${dataSource}">
+
+	select * from member where facname=? and cartype=? and carnum=? 
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist2}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>
+
+	</sql:query>
+	
+	
+	<c:if test="${param.sellist2=='all'}">
+	<sql:query var="resultSet" dataSource="${dataSource}">
+	select * from member where facname=? and carnum=? 
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>	
 	</sql:query>
 	</c:if>
 </c:when>
 
-	<c:when test="${not empty paramValues.example1 and not empty param.sellist3 and param.sellist2!='all'}">
-  <c:set var="ff" value="${paramValues.example1[0]}"/>
+<c:when test="${not empty paramValues.example1 and not empty param.sellist3 and  empty paramValues.example2}">
+
+	<sql:query var="resultSet" dataSource="${dataSource}">
+	<c:set var="ff" value="${paramValues.example1[0]}"/>
      <c:set var="ff1" value="${paramValues.example1[1]}"/>
+	select * from member where facname=? and cartype=? and carnum=? and fuel=? or fuel=?
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist2}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>
+	 <sql:param value="${dd}"/>
+	  <sql:param value="${dd1}"/>
+	</sql:query>
+	
+	
+	<c:if test="${param.sellist2=='all' and ff!='전체'}">
+	<sql:query var="resultSet" dataSource="${dataSource}">
+	select * from member where facname=? and carnum=? and lentoffice=? or lentoffice=?
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>	
+	<sql:param value="${ff}"/>
+	  <sql:param value="${ff1}"/>
+	</sql:query>
+	</c:if>
+	
+	 <c:if test="${param.sellist2!='all' and  ff=='전체'}">
 		<sql:query var="resultSet" dataSource="${dataSource}">
-			select * from member where facname=? and cartype=? and carnum=? and fuel=? or fuel=?
-			 <sql:param value="${param.sellist1}"></sql:param>
-			<sql:param value="${param.sellist2}"></sql:param>
-			<sql:param value="${param.sellist3}"></sql:param>
-			 <sql:param value="${ff}"/>
-			 <sql:param value="${ff1}"/>
-			</sql:query> 
-  
-    <c:if test="${ff=='전체'}">
-		<sql:query var="resultSet" dataSource="${dataSource}">
-			select * from member where facname=? and cartype=? and carnum=? 
-			 <sql:param value="${param.sellist1}"></sql:param>
-			<sql:param value="${param.sellist2}"></sql:param>
-			<sql:param value="${param.sellist3}"></sql:param>
+		select * from member where facname=? and cartype=? and carnum=? 
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist2}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>
 			</sql:query> 
   </c:if>
   
+  <c:if test="${param.sellist2=='all' and ff=='전체'}">
+	<sql:query var="resultSet" dataSource="${dataSource}">
+	select * from member where facname=? and carnum=?
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>	
+	
+	</sql:query>
+	</c:if>
+	
 </c:when>
 
-	<c:when test="${not empty paramValues.example1 and not empty param.sellist3 and param.sellist2=='all'}">
-<c:set var="ff" value="${paramValues.example1[0]}"/>
-     <c:set var="ff1" value="${paramValues.example1[1]}"/>
-		<sql:query var="resultSet" dataSource="${dataSource}">
-			select * from member where facname=? and carnum=? and fuel=? or fuel=?
-			 
-			 <sql:param value="${param.sellist1}"></sql:param>
-			<sql:param value="${param.sellist3}"></sql:param>
-		<sql:param value="${ff}"/>
-			 <sql:param value="${ff1}"/>
-			</sql:query> 
 
-  
-      <c:if test="${ff=='전체'}">
+<c:when test="${not empty paramValues.example1 and not empty param.sellist3 and not empty paramValues.example2 and param.sellist2 !='all'}">
+	<c:set var="ff" value="${paramValues.example1[0]}"/>
+     <c:set var="ff1" value="${paramValues.example1[1]}"/>
+      <c:set var="dd" value="${paramValues.example2[0]}"/>
+     <c:set var="dd1" value="${paramValues.example2[1]}"/>
+     
+<sql:query var="resultSet" dataSource="${dataSource}">
+select * from (select * from member where facname=? and cartype=? and carnum=?)
+where fuel=? or fuel=? and  lentoffice=? or lentoffice=? 
+
+<sql:param value="${param.sellist1}"></sql:param>
+<sql:param value="${param.sellist2}"></sql:param>
+<sql:param value="${param.sellist3}"></sql:param>
+ <sql:param value="${ff}"/>
+ <sql:param value="${ff1}"/>
+  <sql:param value="${dd}"/>
+ <sql:param value="${dd1}"/>
+</sql:query> 
+
+ <c:if test="${ff=='전체' and dd=='전체'}">
 		<sql:query var="resultSet" dataSource="${dataSource}">
-			select * from member where facname=? and carnum=? 
-			 <sql:param value="${param.sellist1}"></sql:param>
-			<sql:param value="${param.sellist3}"></sql:param>
+	select * from member where facname=? and cartype=? and carnum=? 
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist2}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>
 			</sql:query> 
   </c:if>
+  
+  <c:if test="${ff=='전체' and dd!='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+			select * from (select * from member where facname=? and cartype=? and carnum=?) where  lentoffice=? or lentoffice=? 
+			
+			<sql:param value="${param.sellist1}"></sql:param>
+			<sql:param value="${param.sellist2}"></sql:param>
+			<sql:param value="${param.sellist3}"></sql:param> 
+			<sql:param value="${dd}"/>
+ 			<sql:param value="${dd1}"/>
+			</sql:query> 
+  </c:if>
+    <c:if test="${ff!='전체' and dd=='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+			select * from (select * from member where facname=? and cartype=? and carnum=?) where fuel=? or fuel=? 
+			
+			<sql:param value="${param.sellist1}"></sql:param>
+			<sql:param value="${param.sellist2}"></sql:param>
+			<sql:param value="${param.sellist3}"></sql:param> 
+			<sql:param value="${ff}"/>
+ 			<sql:param value="${ff1}"/>
+			</sql:query> 
+  </c:if> 
+
+
 </c:when>
 
+<c:when test="${not empty paramValues.example1 and not empty param.sellist3 and not empty paramValues.example2 and param.sellist2 =='all'}">
+	<c:set var="ff" value="${paramValues.example1[0]}"/>
+     <c:set var="ff1" value="${paramValues.example1[1]}"/>
+      <c:set var="dd" value="${paramValues.example2[0]}"/>
+     <c:set var="dd1" value="${paramValues.example2[1]}"/>
+     
+<sql:query var="resultSet" dataSource="${dataSource}">
+select * from (select * from member where facname=?  and carnum=?)
+where fuel=? or fuel=? and  lentoffice=? or lentoffice=? 
+
+<sql:param value="${param.sellist1}"></sql:param>
+<sql:param value="${param.sellist3}"></sql:param>
+ <sql:param value="${ff}"/>
+ <sql:param value="${ff1}"/>
+  <sql:param value="${dd}"/>
+ <sql:param value="${dd1}"/>
+</sql:query> 
+
+ <c:if test="${ff=='전체' and dd=='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+	select * from member where facname=?  and carnum=? 
+	<sql:param value="${param.sellist1}"></sql:param>
+	<sql:param value="${param.sellist3}"></sql:param>
+			</sql:query> 
+  </c:if>
+  
+  <c:if test="${ff=='전체' and dd!='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+			select * from (select * from member where facname=? and carnum=?) where  lentoffice=? or lentoffice=? 
+			
+			<sql:param value="${param.sellist1}"></sql:param>
+			<sql:param value="${param.sellist3}"></sql:param> 
+			<sql:param value="${dd}"/>
+ 			<sql:param value="${dd1}"/>
+			</sql:query> 
+  </c:if>
+    <c:if test="${ff!='전체' and dd=='전체'}">
+		<sql:query var="resultSet" dataSource="${dataSource}">
+			select * from (select * from member where facname=? and carnum=?) where fuel=? or fuel=? 
+			
+			<sql:param value="${param.sellist1}"></sql:param>
+			<sql:param value="${param.sellist3}"></sql:param> 
+			<sql:param value="${ff}"/>
+ 			<sql:param value="${ff1}"/>
+			</sql:query> 
+  </c:if> 
+
+
+</c:when>
+
+
+	
 
 
 
@@ -466,7 +711,7 @@ select * from member where fuel=? or fuel=?
       </ul>
       <ul class="col-sm-6">
       <li>계약기간 <span>${row.fuel}</span></li>
-      <li>지역  <span>부산</span></li>
+      <li>지역  <span>${row.lentoffice }</span></li>
       </ul>
      </div>
      
@@ -476,6 +721,9 @@ select * from member where fuel=? or fuel=?
  
     <c:remove var="ff"/>
     <c:remove var="ff1"/>
+    
+    <c:remove var="dd"/>
+    <c:remove var="dd1"/>
   
 
   </div>
