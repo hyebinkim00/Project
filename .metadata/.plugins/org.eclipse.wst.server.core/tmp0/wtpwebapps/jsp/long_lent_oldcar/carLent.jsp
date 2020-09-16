@@ -88,16 +88,22 @@ border: 1px solid red;}
 <script type="text/javascript">
 
 		function checkTest4() {
-
 			let testValue = document.getElementById("cntrTermMm4").value;
 			
+			let a = document.getElementById("price").value;
 			
-					
-			document.getElementById("price").innerHTML ='모닝';
+			alert(a)
+			;
+			let d= a-(a* testValue);
 			
-			let c=document.getElementById("price").value;
+			alert(d);
 			
-			alert(c);
+			document.getElementById("mprice").value = d;
+			
+			let o=document.getElementById("mprice").value;
+			
+			alert(o);
+			
 		}
 </script>	
 	
@@ -217,7 +223,7 @@ border: 1px solid red;}
 						<td colspan="3"></td>
 					</tr>
 				</table>
-				<c:set var="car_price" value="${row.carprice }"> </c:set>
+				<c:set var="car_price" value="${row.monthprice }"> </c:set>
 				</c:forEach>
 			</div> 
 			
@@ -262,12 +268,14 @@ border: 1px solid red;}
 
 <button type="button" class="accordion">초기 납부 조건  <span id="result4"></span></button> 
 <div class="panel"><span>할인 조건  </span>
-<select  name="cntrTermMm4" id="cntrTermMm4"  class="option04" >
+<select  name="cntrTermMm4" id="cntrTermMm4"  class="option04" onchange="checkTest4()" >
+
 <option value="5%">5% 할인</option>	
-<option value="10%">10%할인</option>	
+<option value="0.1">10%할인</option>	
 
 </select>
 <input type="hidden" id="price" name="price" value="${car_price}">
+<input type="hidden" id="mprice" name="mprice">
 </div>
 
 

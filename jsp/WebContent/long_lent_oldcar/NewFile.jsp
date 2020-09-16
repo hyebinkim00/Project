@@ -7,7 +7,7 @@
 
 <%request.setCharacterEncoding("utf-8");
 String id =request.getParameter("car");
-String price =request.getParameter("price");
+String price =request.getParameter("mprice");
 String lent1 =request.getParameter("cntrTermMm1");
 String lent2 =request.getParameter("cntrTermMm2");
 String lent3 =request.getParameter("cntrTermMm3");
@@ -49,7 +49,7 @@ String lent4 =request.getParameter("cntrTermMm4");
 	<sql:param value="${param.cntrTermMm2 }" />
 	<sql:param value="${param.cntrTermMm3 }" />
 	<sql:param value="${param.cntrTermMm4 }" />
-	<sql:param value="${param.price }" />
+	<sql:param value="${param.mprice }" />
 </sql:update>
 <c:import var="url" url="carLent.jsp"></c:import>
 {url}
