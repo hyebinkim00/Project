@@ -7,6 +7,8 @@
 
 <%request.setCharacterEncoding("utf-8");
 String id =request.getParameter("car");
+String carn =request.getParameter("carn");
+String carof =request.getParameter("carof");
 String price =request.getParameter("mprice");
 String lent1 =request.getParameter("cntrTermMm1");
 String lent2 =request.getParameter("cntrTermMm2");
@@ -16,7 +18,7 @@ String lent4 =request.getParameter("cntrTermMm4");
 %>
 
 
-<%=id%><%=price%><%=lent1%><%=lent2%><%=lent3%><%=lent4%>
+<%=id%><%=carn%><%=carof%><%=price%><%=lent1%><%=lent2%><%=lent3%><%=lent4%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,13 +45,16 @@ String lent4 =request.getParameter("cntrTermMm4");
 			user="hr" password="hr"/>
 
 	<sql:update dataSource="${dataSource}" var="resultSet">
-	Insert into  lent(car_num,user_id,lent_term,insurance,lent_car,service,totalprice) values (?,'1',?,?,?,?,?)
+	Insert into  lent(car_num,user_id,lent_term,insurance,lent_car,service,totalprice,carn,lentoffice) values (?,'1',?,?,?,?,?,?,?)
+
 	<sql:param value="${param.car }" />
 	<sql:param value="${param.cntrTermMm1 }" />
 	<sql:param value="${param.cntrTermMm2 }" />
 	<sql:param value="${param.cntrTermMm3 }" />
 	<sql:param value="${param.cntrTermMm4 }" />
 	<sql:param value="${param.mprice }" />
+	<sql:param value="${param.carn }" />
+	<sql:param value="${param.carof }" />
 </sql:update>
 <c:import var="url" url="carLent.jsp"></c:import>
 {url}

@@ -694,24 +694,25 @@ where fuel=? or fuel=? and  lentoffice=? or lentoffice=?
   <div onclick="location.href='${url}'" class="card col-sm-6 " style="width:500px; height:300px; ">
     <div >
    <img class="card-img-top col-sm-8" src="../resources/images/${row.carname}.jpg" alt="Card image" style="width:250px">
-    <span class="col-sm-3"><strong><c:out value="${row.carname}"/> </strong></span>
+    <span class="col-sm-3"><strong> [<c:out value="${row.facname}"/>]<c:out value="${row.carname}"/></strong></span>
     </div>
     <div class="card-body">
-      <a class="card-title" style="border:1px solid">소비자가 </a>
-      <a ><c:out value="${row.carPrice }"></c:out></a>
-      <a class="card-title" style="border:1px solid red"><span style="color:red"><strong>월 렌탈료</strong></span></a>
-      <a >&nbsp;&nbsp; <span style="color:red"><strong><c:out value="${row.monthPrice }"></c:out></strong></span></a>
-     
+    <div class="row">
+      <a class="card-title col-sm-3" style="border:1px solid"><strong>소비자가 </strong></a>
+      <a class="col-sm-3"><c:out value="${row.carPrice }"></c:out></a>
+      <a class="card-title col-sm-3" style="border:1px solid red"><span style="color:red"><strong>월 렌탈료</strong></span></a>
+      <a class="col-sm-3" ><span style="color:red"><strong><c:out value="${row.monthPrice }"></c:out>원~</strong></span></a>
+     </div>
       <hr style="border:1px solid"></hr>
       <div class="row">
       <ul class="col-sm-6">
-      <li>차량 등록 <span>${row.facname}</span></li>
-      <li>주행거리 <span>${row. cartype}</span></li>
+      <li>차량번호 <span>${row.id}</span></li>
+      <li>차량유형 <span>${row.cartype}</span></li>
       
       </ul>
       <ul class="col-sm-6">
-      <li>계약기간 <span>${row.fuel}</span></li>
-      <li>지역  <span>${row.lentoffice }</span></li>
+      <li>연료 <span>${row.fuel}</span></li>
+      <li>지점 <span>${row.lentoffice }</span></li>
       </ul>
      </div>
      

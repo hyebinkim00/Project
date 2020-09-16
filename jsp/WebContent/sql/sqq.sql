@@ -4,7 +4,7 @@ create table member(
  facname varchar2(50) not null 
 );
 
-ALTER TABLE member add lentoffice varchar2(30);
+ALTER TABLE lent add carn varchar2(30);
 
 ALTER TABLE member add carPrice varchar2(30);
 ALTER TABLE member add monthPrice varchar2(30);
@@ -22,7 +22,7 @@ insert into member(id,carname,facname) values ('55-55','¾Æ¹Ý¶¼5','Çö´ë');
 insert into member(id,carname,facname,fuel,cartype,carnum) values ('99-99','K9','±â¾Æ','ÈÖ¹ßÀ¯','ÁßÇü','2');
 
 
-select * from member where facname='Çö´ë' and cartype='ÁßÇü' and carnum='¾Æ¹Ý¶¼' ;
+select * from member where monthprice>323000;
 
 
 
@@ -36,7 +36,7 @@ select * from member where fuel='ÈÖ¹ßÀ¯' or fuel='LPG';
 update MEMBER set lentoffice='°­¿ø' where id='99-99';
 update MEMBER set cartype='ÁßÇü' where id='66-66';
 
-update MEMBER set carPrice='20,500,00¿ø' where carnum='¸ð´×';
+update MEMBER set lent='10' where carnum='¾Æ¹Ý¶¼';
 update MEMBER set monthprice='5000000' where carnum='¾Æ¹Ý¶¼';
 
 
@@ -47,9 +47,9 @@ select * from lent;
 update member set carnum='¾Æ¹Ý¶¼' where carname='¾Æ¹Ý¶¼8';
 
 
-alter table member drop column monthprice;
+alter table member drop column carn;
 
-alter table member add monthprice int ;
+alter table lent add lentoffice varchar2(20) ;
 
 
 

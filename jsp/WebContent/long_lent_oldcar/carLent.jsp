@@ -100,6 +100,7 @@ border: 1px solid red;}
 			
 			document.getElementById("mprice").value = d;
 			
+			document.getElementById("result4").innerHTML=d;
 			let o=document.getElementById("mprice").value;
 			
 			alert(o);
@@ -149,23 +150,25 @@ border: 1px solid red;}
 				<table>
 					<tr>
 						<td colspan="2"><span><strong>모델명</strong></span></td>
-						<td>올 뉴모닝 1.0[가솔린]VAN</td>
+						<td><c:out value="${row.carname}"/></td>
 					</tr>
 					<tr>
 						<td colspan="2"><span><strong>소비자 가</strong></span>  &nbsp; &nbsp; &nbsp;</td>
-						<td>10,700,000 원</td>
+						<td><c:out value="${row.carprice}"/></td>
 					</tr>
 					<tr>
 						<td colspan="2"><span><strong>계약 기간</strong></span></td>
-						<td>최대11개월</td>
+						<td>최대<c:out value="${row.lent}"/>개월</td>
 					</tr>
 				</table>
 				<hr>
 				<p>
-					표준렌탈료 &nbsp; &nbsp; &nbsp; <font size="5" color="red"> 280,000</font>원
+					표준렌탈료 &nbsp; &nbsp; &nbsp; <font size="5" color="red"> <c:out value="${row.monthprice }" /></font>원
 				</p>
 				
 			</div>
+			<c:set var="lentt" value="${row.lent}"/>
+			
 			</c:forEach>
 		</div>
 
@@ -196,7 +199,7 @@ border: 1px solid red;}
 					</tr>
 					<tr>
 						<th class="bg-light text-dark">모델명</th>
-						<td colspan="3">올 뉴모닝 1.0[가솔린]VAN</td>
+						<td colspan="3"><c:out value="${row.carname}"></c:out></td>
 					</tr>
 					<tr>
 						<th class="bg-light text-dark">제조사차량옵션</th>
@@ -207,23 +210,16 @@ border: 1px solid red;}
 						<td colspan="3">-</td>
 					</tr>
 					<tr>
-						<th class="bg-light text-dark">주행거리</th>
-						<td>62,256 km</td>
 						<th class="bg-light text-dark">연료</th>
-						<td>휘발유</td>
+						<td><c:out value="${row.fuel}"/></td>
+						<th class="bg-light text-dark">지점</th>
+						<td><c:out value="${row.lentoffice}"/></td>
 					</tr>
-					<tr>
-						<th class="bg-light text-dark">배기량</th>
-						<td>1,000 cc</td>
-						<th class="bg-light text-dark">색상</th>
-						<td>스파클링실버</td>
-					</tr>
-					<tr>
-						<th class="bg-light text-dark">지역</th>
-						<td colspan="3"></td>
-					</tr>
+				
 				</table>
 				<c:set var="car_price" value="${row.monthprice }"> </c:set>
+				<c:set var="car_name" value="${row.carname }"> </c:set>
+				<c:set var="lent_office" value="${row.lentoffice }"> </c:set>
 				</c:forEach>
 			</div> 
 			
@@ -235,17 +231,18 @@ border: 1px solid red;}
 <hr style="border: solid 1px black " /> 
 
 
-<form method="post" action="NewFile.jsp" >
+<form method="post" action="shortTerm_payment_completed.jsp" >
 
 <input type="hidden" id="car" name="car" value="${param.carname}">
+<input type="hidden" id="carn" name="carn" value="${car_name}">
+<input type="hidden" id="carof" name="carof" value="${lent_office}">
+
 <button type="button" class="accordion">계약 기간: &nbsp;&nbsp;&nbsp;<span id="result1"></span></button>
 <div class="panel"><span>차량 운행할수 있는 총 대여기간: &nbsp; &nbsp; &nbsp; &nbsp;</span>
 <select name="cntrTermMm1" id="cntrTermMm1" class="option01" onchange="checkTest1()" >
-<option value="1개월">1개월</option>	
-<option value="2개월">2개월</option>	
-<option value="3개월">3개월</option>
-<option value="4개월">4개월</option>
-<option value="5개월">5개월</option>
+<c:forEach var="i" begin="1" end="${lentt}">
+<option value="<c:out value="${i}"/>개월"><c:out value="${i}"/>개월</option>	</c:forEach>
+
 </select>
 </div>
 
@@ -270,7 +267,7 @@ border: 1px solid red;}
 <div class="panel"><span>할인 조건  </span>
 <select  name="cntrTermMm4" id="cntrTermMm4"  class="option04" onchange="checkTest4()" >
 
-<option value="5%">5% 할인</option>	
+<option value="0.05">5% 할인</option>	
 <option value="0.1">10%할인</option>	
 
 </select>
@@ -282,6 +279,10 @@ border: 1px solid red;}
 <input type="submit" value="전송">
 </form>
 <c:remove var="car_price"/>
+<c:remove var="lentt"/>
+<c:remove var="car_name"/>
+<c:remove var="lent_office"/>
+
 </div>
 
 
