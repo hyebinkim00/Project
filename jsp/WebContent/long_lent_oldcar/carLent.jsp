@@ -55,13 +55,12 @@ String carname=request.getParameter("carname");
 div.f{
 border: 1px solid red;}
 </style>
-<link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <meta charset="UTF-8" />
 <title>장기 중고 상세</title>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-</head>
+</head>  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <body>
 <script type="text/javascript">
 
@@ -100,7 +99,7 @@ border: 1px solid red;}
 			
 			document.getElementById("mprice").value = d;
 			
-			document.getElementById("result4").innerHTML=d;
+			document.getElementById("result4").innerHTML=d+'원';
 			let o=document.getElementById("mprice").value;
 			
 			alert(o);
@@ -108,6 +107,13 @@ border: 1px solid red;}
 		}
 </script>	
 	
+<script>
+function go(){
+	let form= document.userinput;
+	form.submit();
+	
+}
+</script>
 	
 	
 	
@@ -220,6 +226,7 @@ border: 1px solid red;}
 				<c:set var="car_price" value="${row.monthprice }"> </c:set>
 				<c:set var="car_name" value="${row.carname }"> </c:set>
 				<c:set var="lent_office" value="${row.lentoffice }"> </c:set>
+				<c:set var="prices" value="${row.carprice }"> </c:set>
 				</c:forEach>
 			</div> 
 			
@@ -231,7 +238,7 @@ border: 1px solid red;}
 <hr style="border: solid 1px black " /> 
 
 
-<form method="post" action="shortTerm_payment_completed.jsp" >
+<form method="post" action="shortTerm_payment_completed.jsp" name="userinput" >
 
 <input type="hidden" id="car" name="car" value="${param.carname}">
 <input type="hidden" id="carn" name="carn" value="${car_name}">
@@ -263,7 +270,7 @@ border: 1px solid red;}
 </select>
 </div>
 
-<button type="button" class="accordion">초기 납부 조건  <span id="result4"></span></button> 
+<button type="button" class="accordion">초기 납부 조건 </button> 
 <div class="panel"><span>할인 조건  </span>
 <select  name="cntrTermMm4" id="cntrTermMm4"  class="option04" onchange="checkTest4()" >
 
@@ -276,12 +283,8 @@ border: 1px solid red;}
 </div>
 
 
-<input type="submit" value="전송">
+
 </form>
-<c:remove var="car_price"/>
-<c:remove var="lentt"/>
-<c:remove var="car_name"/>
-<c:remove var="lent_office"/>
 
 </div>
 
@@ -314,7 +317,21 @@ border: 1px solid red;}
 
 
 
+ <br><br><br><br><br>
+<div class="container col-sm-8 fixed-bottom ">
 
+  <div class="row d-flex p-3 bg-warning text-white ">  
+    <div class="col-sm-4 p-2 bg-warning">월 렌탈료<br> (총 차량 소비자가)</div>
+    <div class="col-sm-4 p-2 bg-warning"><span id="result4"><c:out value="${car_price}" />원</span><br><c:out value="${prices}" /></div>
+    <div class="col-sm-4 p-2 bg-warning"><button class="bg-primary text-white" onclick="go()">예약하기</button></div>
+  </div>
+  
+  
+  <c:remove var="car_price"/>
+<c:remove var="lentt"/>
+<c:remove var="car_name"/>
+<c:remove var="lent_office"/>
+</div>
 
 
 
