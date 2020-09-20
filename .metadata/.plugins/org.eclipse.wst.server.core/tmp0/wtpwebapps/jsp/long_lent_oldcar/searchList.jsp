@@ -25,9 +25,21 @@ String chekcBoxex2[] =request.getParameterValues("example2");
   <link rel="stylesheet" href="../resources/css/bootstrap.min.css" />
 
 <title>중고차 장기 검색</title>
+
+<script>
+function subtest(){
+let a=documenet.getElementById("sellist2").value;
+alert(a);
+}
+</script>
+
 <script>
 $(document).ready(function(){
 	$("input:checkbox[name=example1]").on("click",function(){
+		if($('#sellist2').val()=='차량 유형 선택'){
+			let a='null 값';
+			$('#sellist2').focus();
+		alert(a);}
 		let cont=$("input:checkbox[name=example1]:checked").length;
 		alert(cont);
 		let cont5=$("input:checkbox[name=example1]:checked").val();
@@ -38,9 +50,6 @@ $(document).ready(function(){
 		}else {
 	            $("input[name=example1]:checkbox").prop("disabled",false);
 	        }
-
-
-		
 		if(cont>2){
 			$(this).prop("checked", false);
 			alert("2개이상 선택 불가능 ");
@@ -201,7 +210,7 @@ if(checked==0){
    
   <div class="container" style="border:solid 2px;">
   
- <form method="post" action="#" name="userinput">
+ <form method="post" action="#" name="userinput" >
     <div class="row" >
      <span class="col-sm-1">&nbsp;</span>
      <div class="col-sm-3">
@@ -252,7 +261,7 @@ if(checked==0){
       </c:if>
       
       <select class="form-control" id="sellist3" name="sellist3" >
-        <option disabled>차량 선택</option>
+        <option readonly>차량 선택</option>
        <c:forEach var="row" items="${resultSet.rows}">
 				<option value="<c:out value="${row.carnum}"/>" <c:if test="${param.sellist3==row.carnum}">selected</c:if>><c:out value="${row.carnum}"/></option>
 				</c:forEach>
@@ -537,14 +546,14 @@ select * from (select * from member where fuel=? or fuel=?) where lentoffice=? o
 	<sql:param value="${param.sellist1}"></sql:param>
 	<sql:param value="${param.sellist2}"></sql:param>
 	<sql:param value="${param.sellist3}"></sql:param>
-	 <sql:param value="${dd}"/>
-	  <sql:param value="${dd1}"/>
+	 <sql:param value="${ff}"/>
+	  <sql:param value="${ff1}"/>
 	</sql:query>
 	
 	
 	<c:if test="${param.sellist2=='all' and ff!='전체'}">
 	<sql:query var="resultSet" dataSource="${dataSource}">
-	select * from member where facname=? and carnum=? and lentoffice=? or lentoffice=?
+	select * from member where facname=? and carnum=? and fuel=? or fuel=?
 	<sql:param value="${param.sellist1}"></sql:param>
 	<sql:param value="${param.sellist3}"></sql:param>	
 	<sql:param value="${ff}"/>
@@ -686,22 +695,25 @@ where fuel=? or fuel=? and  lentoffice=? or lentoffice=?
 <c:otherwise>선택 항목 없음</c:otherwise>
 
 </c:choose>
+</div>
 
-
-
+<div class="container row">
 		<c:forEach var="row" items="${resultSet.rows}">
+		
 		<c:url value="carLent.jsp" var="url"> <c:param name="carname" value="${row.id}" /></c:url>		
-  <div onclick="location.href='${url}'" class="card col-sm-6 " style="width:500px; height:300px; ">
-    <div >
-   <img class="card-img-top col-sm-8" src="../resources/images/${row.carname}.jpg" alt="Card image" style="width:250px">
-    <span class="col-sm-3"><strong> [<c:out value="${row.facname}"/>]<c:out value="${row.carname}"/></strong></span>
+  <div onclick="location.href='${url}'" class="card col-sm-6 " >
+    <div class="row">
+   <img class="card-img-top col-sm-7" src="../resources/images/${row.carname}.jpg" alt="Card image" width="150" height="150">
+    <span class="col-sm-5"><br><br><br><strong> [<c:out value="${row.facname}"/>]<c:out value="${row.carname}"/></strong></span>
     </div>
     <div class="card-body">
     <div class="row">
-      <a class="card-title col-sm-3" style="border:1px solid"><strong>소비자가 </strong></a>
-      <a class="col-sm-3"><c:out value="${row.carPrice }"></c:out></a>
-      <a class="card-title col-sm-3" style="border:1px solid red"><span style="color:red"><strong>월 렌탈료</strong></span></a>
-      <a class="col-sm-3" ><span style="color:red"><strong><c:out value="${row.monthPrice }"></c:out>원~</strong></span></a>
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-outline-dark " disabled>소비자가</button>
+      <strong><c:out value="${row.carPrice }"></c:out></strong></div>
+      <div class="col-sm-6">
+      <button type="button" class="btn btn-outline-danger" >월 렌탈료</button>
+      <strong style="color:red"><c:out value="${row.monthPrice }"></c:out>원~</strong></div>
      </div>
       <hr style="border:1px solid"></hr>
       <div class="row">
@@ -719,7 +731,7 @@ where fuel=? or fuel=? and  lentoffice=? or lentoffice=?
     </div>
   </div>
 </c:forEach>
- 
+ </div>
     <c:remove var="ff"/>
     <c:remove var="ff1"/>
     
@@ -732,7 +744,7 @@ where fuel=? or fuel=? and  lentoffice=? or lentoffice=?
     
 
   
-  </div>
+
   
   
 </body>

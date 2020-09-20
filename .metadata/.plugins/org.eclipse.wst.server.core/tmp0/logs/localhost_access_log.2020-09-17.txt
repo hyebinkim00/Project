@@ -1,0 +1,13 @@
+127.0.0.1 - - [17/Sep/2020:17:40:42 +0900] "GET / HTTP/1.1" 404 807
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:40:48 +0900] "GET /jsp/long_lent_oldcar/searchList.jsp HTTP/1.1" 200 19304
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:40:48 +0900] "GET /jsp/resources/images/K3.jpg HTTP/1.1" 200 53446
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:40:48 +0900] "GET /jsp/resources/images/%EC%95%84%EB%B0%98%EB%96%BC4.jpg HTTP/1.1" 200 90266
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:40:48 +0900] "GET /jsp/resources/images/%EC%95%84%EB%B0%98%EB%96%BC5.jpg HTTP/1.1" 200 51884
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:40:48 +0900] "GET /jsp/resources/images/%EC%95%84%EB%B0%98%EB%96%BC6.jpg HTTP/1.1" 200 51510
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:40:48 +0900] "GET /jsp/resources/images/K5.jpg HTTP/1.1" 200 212976
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:40:49 +0900] "GET /favicon.ico HTTP/1.1" 404 818
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:40:59 +0900] "GET /jsp/long_lent_oldcar/carLent.jsp;jsessionid=D3AA3F3850F7327CC83BBDB5E0B857EF?carname=66-66 HTTP/1.1" 200 9210
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:40:59 +0900] "GET /jsp/resources/images/%EC%95%84%EB%B0%98%EB%96%BC6.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:41:07 +0900] "GET /jsp/long_lent_oldcar/carLent.jsp;jsessionid=D3AA3F3850F7327CC83BBDB5E0B857EF?carname=66-66 HTTP/1.1" 200 9210
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:41:07 +0900] "GET /jsp/resources/images/%EC%95%84%EB%B0%98%EB%96%BC6.jpg HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [17/Sep/2020:17:41:41 +0900] "POST /jsp/long_lent_oldcar/shortTerm_payment_completed.jsp HTTP/1.1" 200 3040

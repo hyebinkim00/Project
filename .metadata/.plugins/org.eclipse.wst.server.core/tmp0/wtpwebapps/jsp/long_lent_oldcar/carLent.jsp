@@ -86,14 +86,27 @@ border: 1px solid red;}
 
 <script type="text/javascript">
 
+		function checkTest3() {
+
+			let testValue = document.getElementById("cntrTermMm3").value;
+
+			document.getElementById("result3").innerHTML = testValue;
+
+		}
+</script>
+
+
+<script type="text/javascript">
+
 		function checkTest4() {
 			let testValue = document.getElementById("cntrTermMm4").value;
 			
 			let a = document.getElementById("price").value;
 			
-			alert(a)
-			;
+			alert(testValue);
+			
 			let d= a-(a* testValue);
+			
 			
 			alert(d);
 			
@@ -253,8 +266,8 @@ function go(){
 </select>
 </div>
 
-<button type="button" class="accordion">보험조건  <span id="result2"></span></button> 
-<div class="panel"><span>계약기간 총 주행거리 초과 시 위약금 발생   </span>
+<button type="button" class="accordion">약정 주행거리: <span id="result2"></span></button> 
+<div class="panel"><span>계약기간 총 주행거리 초과 시 위약금 발생  </span>
 <select  name="cntrTermMm2" id="cntrTermMm2"  class="option02" onchange="checkTest2()" >
 <option value="월 2천 Km이하">월 2천 Km이하</option>	
 <option value="월 3천 Km이하">월 3천 Km이하</option>	
@@ -263,21 +276,22 @@ function go(){
 </div>
 
 <button type="button" class="accordion">사고시 차량 대여  <span id="result3"></span></button> 
-<div class="panel"><span>사고 시 차량 대여 서비스  </span>
-<select  name="cntrTermMm3" id="cntrTermMm3"  class="option03"  >
+<div class="panel"><span>사고 발생시 대차 서비스 </span>
+<select  name="cntrTermMm3" id="cntrTermMm3"  class="option03" onchange="checkTest3()" >
 <option value="yes">포함</option>	
 <option value="no">불 포함</option>	
 </select>
 </div>
 
 <button type="button" class="accordion">초기 납부 조건 </button> 
-<div class="panel"><span>할인 조건  </span>
+<div class="panel"><span>보증금을 보증보험으로 대체(보증보험 수수료 발생) </span>
 <select  name="cntrTermMm4" id="cntrTermMm4"  class="option04" onchange="checkTest4()" >
-
-<option value="0.05">5% 할인</option>	
-<option value="0.1">10%할인</option>	
-
+<option value="0">보증 보험</option>
+<option value="0.05">보증금 5%</option>	
+<option value="0.1">보증금 10%</option>	
+<option value="0.2">보증금 20%</option>
 </select>
+
 <input type="hidden" id="price" name="price" value="${car_price}">
 <input type="hidden" id="mprice" name="mprice">
 </div>
@@ -318,12 +332,14 @@ function go(){
 
 
  <br><br><br><br><br>
-<div class="container col-sm-8 fixed-bottom ">
+<div class="container col-sm-8 fixed-bottom "  style="border:1px solid orange;">
 
   <div class="row d-flex p-3 bg-warning text-white ">  
-    <div class="col-sm-4 p-2 bg-warning">월 렌탈료<br> (총 차량 소비자가)</div>
-    <div class="col-sm-4 p-2 bg-warning"><span id="result4"><c:out value="${car_price}" />원</span><br><c:out value="${prices}" /></div>
-    <div class="col-sm-4 p-2 bg-warning"><button class="bg-primary text-white" onclick="go()">예약하기</button></div>
+    <div class="col-sm-4 p-2 bg-warning"><h5>월 렌탈료<br>(총 차량 구매가)</h5></div>
+    <div class="col-sm-3 p-2 bg-warning"><br></div>
+    <div class="col-sm-2 p-2 bg-warning"><h5><span id="result4"><c:out value="${car_price}" />원</span><br><c:out value="${prices}" /></h5></div>
+    <div class="col-sm-1 p-2 bg-warning"><br></div>
+    <div class="col-sm-2 p-2 bg-warning"><button class="btn btn-light" onclick="go()">지점방문<br>예약하기</button></div>
   </div>
   
   
