@@ -36,10 +36,14 @@ alert(a);
 <script>
 $(document).ready(function(){
 	$("input:checkbox[name=example1]").on("click",function(){
-		if($('#sellist2').val()=='차량 유형 선택'){
-			let a='null 값';
+		
+		if(($('#sellist1').val()!='제조사 선택') && ($('#sellist2').val()=='차량 유형 선택')){
+			alert('널 값 ');
+			$("input:checkbox[name=example1]").prop("checked", false);
 			$('#sellist2').focus();
+			$('#tess1').prop("disabled",true);
 		alert(a);}
+		else{$('#tess1').prop("disabled",false);}
 		let cont=$("input:checkbox[name=example1]:checked").length;
 		alert(cont);
 		let cont5=$("input:checkbox[name=example1]:checked").val();
@@ -312,7 +316,7 @@ if(checked==0){
 
 
 
-   <input type="submit" value="검색" class= "col-sm-1">
+   <input id="tess1" type="submit" value="검색" class= "btn btn-info col-sm-1" >
   </div>
   
  
@@ -363,7 +367,7 @@ if(checked==0){
      <c:remove var="dd"/>
     <c:remove var="dd1"/>
     </div>
-    <input type="submit" value="검색" class="col-sm-1">
+    <input id="tess2" type="submit" value="검색" class="btn btn-info col-sm-1">
   </div>
     </form>
   
@@ -542,7 +546,7 @@ select * from (select * from member where fuel=? or fuel=?) where lentoffice=? o
 	<sql:query var="resultSet" dataSource="${dataSource}">
 	<c:set var="ff" value="${paramValues.example1[0]}"/>
      <c:set var="ff1" value="${paramValues.example1[1]}"/>
-	select * from member where facname=? and cartype=? and carnum=? and fuel=? or fuel=?
+select * from (select * from member where facname=? and cartype=? and carnum=?) where  fuel=? or fuel=?
 	<sql:param value="${param.sellist1}"></sql:param>
 	<sql:param value="${param.sellist2}"></sql:param>
 	<sql:param value="${param.sellist3}"></sql:param>
@@ -553,7 +557,7 @@ select * from (select * from member where fuel=? or fuel=?) where lentoffice=? o
 	
 	<c:if test="${param.sellist2=='all' and ff!='전체'}">
 	<sql:query var="resultSet" dataSource="${dataSource}">
-	select * from member where facname=? and carnum=? and fuel=? or fuel=?
+	select * from (select * from member where facname=? and carnum=?) where fuel=? or fuel=?
 	<sql:param value="${param.sellist1}"></sql:param>
 	<sql:param value="${param.sellist3}"></sql:param>	
 	<sql:param value="${ff}"/>

@@ -52,7 +52,9 @@ alter table member drop column carn;
 alter table lent add lentoffice varchar2(20) ;
 
 
+select from 
 
+select * from (select * from member where facname='기아' and cartype='소형' and carnum='K') where  fuel='휘발유' or fuel='LPG';
 
 
 
