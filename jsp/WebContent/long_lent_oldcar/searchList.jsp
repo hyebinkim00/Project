@@ -36,18 +36,16 @@ alert(a);
 <script>
 $(document).ready(function(){
 	$("input:checkbox[name=example1]").on("click",function(){
-		
 		if(($('#sellist1').val()!='제조사 선택') && ($('#sellist2').val()=='차량 유형 선택')){
-			alert('널 값 ');
+			alert('차량 유형을 선택하세요!');
 			$("input:checkbox[name=example1]").prop("checked", false);
 			$('#sellist2').focus();
 			$('#tess1').prop("disabled",true);
-		alert(a);}
+		}
 		else{$('#tess1').prop("disabled",false);}
 		let cont=$("input:checkbox[name=example1]:checked").length;
 		alert(cont);
 		let cont5=$("input:checkbox[name=example1]:checked").val();
-		alert(cont5);
 		if(cont5=='전체'){$("input:checkbox[name=example1]").not(this).prop("disabled", "disabled");
 		$("input:checkbox[name=example1]").not(this).prop("checked", false);
 		
@@ -67,10 +65,16 @@ $(document).ready(function(){
 <script>
 $(document).ready(function(){
 	$("input:checkbox[name=example2]").on("click",function(){
+		if(($('#sellist1').val()!='제조사 선택') && ($('#sellist2').val()=='차량 유형 선택')){
+			alert('차량 유형을 선택하세요!');
+			$("input:checkbox[name=example2]").prop("checked", false);
+			$('#sellist2').focus();
+			$('#tess2').prop("disabled",true);
+		}
+		else{$('#tess1').prop("disabled",false);}
 		let cont=$("input:checkbox[name=example2]:checked").length;
 		alert(cont);
 		let cont5=$("input:checkbox[name=example2]:checked").val();
-		alert(cont5);
 		if(cont5=='전체'){$("input:checkbox[name=example2]").not(this).prop("disabled", "disabled");
 		$("input:checkbox[name=example2]").not(this).prop("checked", false);
 		
@@ -110,21 +114,16 @@ function goDate2(){
 </script>
 
 
-<script>
-function chtest1(){
-	document.getElementById("sellist2").value=null;
-	document.getElementById("sellist2").disabled=false;
-	
-}
-</script>
 
 <script>
-function chtest2(){
-	document.getElementById("sellist3").value=null;
-	document.getElementById("sellist3").disabled=false;
-	
-}
-</script>
+function optest(){
+	if( (($('#sellist2').val()=='차량 유형 선택')) && ($("input:checkbox[name=example1]:checked").length!=0) )
+	alert('차량 유형을 먼저 선택하세요');
+	$("input:checkbox[name=example1]").prop("checked", false);
+
+}</script>
+
+
  
  <script>
  function test1(){
@@ -150,56 +149,7 @@ function chtest2(){
  </script>
  
  
-<script>
-function fchk(){
-	let chk_obj = document.getElementsByName("example1");
-	let chk_leng = chk_obj.length;
-	let checked = 0; 
 
-	for(i=0;i<chk_leng;i++){
-		if(chk_obj[i].checked==true){
-			checked +=1;
-			alert(chk_obj[i].value);
-		}
-}
-if(checked==0){
-	alert("선택한정보가 없습니다.");
-	return;
-}else{
-	alert(checked+"개선택");
-	return;
-
- }
-}
-
-</script>
-
-<script>
-function fchk1(){
-	let chk_obj = document.getElementsByName("example2");
-	let chk_leng = chk_obj.length;
-	let checked = 0; 
-
-	for(i=0;i<chk_leng;i++){
-		if(chk_obj[i].checked==true){
-		
-			checked +=1;
-			alert(chk_obj[i].value);
-		}
-
-}
-
-if(checked==0){
-	alert("선택한정보가 없습니다.");
-	return;
-}else{
-	alert(checked+"개선택");
-	return;
-
- }
-}
-
-</script>
 
 
 	
@@ -265,14 +215,14 @@ if(checked==0){
       </c:if>
       
       <select class="form-control" id="sellist3" name="sellist3" >
-        <option readonly>차량 선택</option>
+        <option disabled>차량 선택</option>
        <c:forEach var="row" items="${resultSet.rows}">
 				<option value="<c:out value="${row.carnum}"/>" <c:if test="${param.sellist3==row.carnum}">selected</c:if>><c:out value="${row.carnum}"/></option>
 				</c:forEach>
       </select>
       </div>
      
- <input id="tess" type="submit" class="btn btn-primary col-sm-1" value="검색">
+ <input id="tess" type="submit" class="btn btn-primary col-sm-1" value="검색" onclick="optest()">
 
     
     </div>
@@ -316,7 +266,7 @@ if(checked==0){
 
 
 
-   <input id="tess1" type="submit" value="검색" class= "btn btn-info col-sm-1" >
+   <input id="tess1" type="submit" value="검색" class= "btn btn-info col-sm-1" onclick="optest()">
   </div>
   
  
@@ -367,7 +317,7 @@ if(checked==0){
      <c:remove var="dd"/>
     <c:remove var="dd1"/>
     </div>
-    <input id="tess2" type="submit" value="검색" class="btn btn-info col-sm-1">
+    <input id="tess2" type="submit" value="검색" class="btn btn-info col-sm-1" onclick="optest()">
   </div>
     </form>
   
@@ -400,10 +350,12 @@ if(checked==0){
 <c:if test="${not empty paramValues.example1 and empty paramValues.example2}">
  	<c:set var="ff" value="${paramValues.example1[0]}"/>
     <c:set var="ff1" value="${paramValues.example1[1]}"/>
+
 <sql:query var="resultSet" dataSource="${dataSource}">
 select * from member where fuel=? or fuel=?
  <sql:param value="${ff}"/>
  <sql:param value="${ff1}"/>
+
 </sql:query>  
   
  <c:if test="${ff=='전체'}">

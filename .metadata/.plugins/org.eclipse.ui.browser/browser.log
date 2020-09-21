@@ -1,0 +1,4 @@
+
+9월 21, 2020 18:41:41.400 NEW SESSION
+9월 21, 2020 18:41:41.400 [2240:16068:0921/184141.395:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 5.1 s for first_image_paint 5.033 s
+9월 21, 2020 18:41:42.397 [2240:16068:0921/184142.396:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 5.1 s for first_image_paint 5.033 s
