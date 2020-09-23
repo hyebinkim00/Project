@@ -6,14 +6,11 @@
 
 
 <%request.setCharacterEncoding("utf-8");
-String id =request.getParameter("car");
-String carn =request.getParameter("carn");
-String price =request.getParameter("mprice");
-String lent1 =request.getParameter("cntrTermMm1");
-String lent2 =request.getParameter("cntrTermMm2");
-String lent3 =request.getParameter("cntrTermMm3");
-String lent4 =request.getParameter("cntrTermMm4");
 
+
+String lent2 =request.getParameter("parpa2");
+String lent3 =request.getParameter("parpa3");
+String lent4 =request.getParameter("parpa4");
 %>
     
 <!DOCTYPE html>
@@ -33,11 +30,15 @@ String lent4 =request.getParameter("cntrTermMm4");
 <div class="jumbotron bg-white">
   <div class="container col-sm-6">
   <h1>예약정보</h1>
+<%=lent2%>
+<%=lent3%>
+<%=lent4%>
+
   <hr>
   </div>
 </div>
 
-<div class="container col-sm-6">
+<%-- <div class="container col-sm-6">
 <div class="container">
 <div class="container bg-light">
 <br>
@@ -55,7 +56,7 @@ String lent4 =request.getParameter("cntrTermMm4");
 	Insert into  lent(car_num,user_id,lent_term,insurance,lent_car,service,totalprice,carn) values (?,'1',?,?,?,?,?,?)
 	<sql:param value="${param.car }" />
 	<sql:param value="${param.cntrTermMm1 }" />
-	<sql:param value="${param.cntrTermMm2 }" />
+	<sql:param value="${param.parpa }" />
 	<sql:param value="${param.cntrTermMm3 }" />
 	<sql:param value="${param.cntrTermMm4 }" />
 	<sql:param value="${param.mprice }" />
@@ -112,7 +113,7 @@ String lent4 =request.getParameter("cntrTermMm4");
   <br>
   </div>
   </div><!-- table container -->
-  </div>
+  </div> --%>
 <br>
 <br>
 <br>

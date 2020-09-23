@@ -117,42 +117,14 @@ function goDate2(){
 
 <script>
 function optest(){
-	if( (($('#sellist2').val()=='차량 유형 선택')) && ($("input:checkbox[name=example1]:checked").length!=0) )
-	alert('차량 유형을 먼저 선택하세요');
+	if((($('#sellist1').val()!='제조사 선택')) && (($('#sellist2').val()=='차량 유형 선택')) && ($("input:checkbox[name=example1]:checked").length!=0) ){
+		alert('차량 유형을 먼저 선택하세요');
 	$("input:checkbox[name=example1]").prop("checked", false);
+	}
 
 }</script>
 
 
- 
- <script>
- function test1(){
-	 
- let target1=document.getElementById("sellist1");
-
-/*  alert('선택된 옵션 text 값=' + target1.options[target1.selectedIndex].text);     // 옵션 text 값 */
- alert('선택된 옵션 value 값=' + target1.options[target1.selectedIndex].value);     // 옵션 value 값
-
- let target2=document.getElementById("sellist2");
-
-/*  alert('선택된 옵션 text 값=' + target2.options[target2.selectedIndex].text);     // 옵션 text 값 */
- alert('선택된 옵션 value 값=' + target2.options[target2.selectedIndex].value);     // 옵션 value 값
-
- let target3=document.getElementById("sellist3");
-
-/*  alert('선택된 옵션 text 값=' + target3.options[target3.selectedIndex].text);     // 옵션 text 값 */
- alert('선택된 옵션 value 값=' + target3.options[target3.selectedIndex].value);     // 옵션 value 값
-
- 
- }
- 
- </script>
- 
- 
-
-
-
-	
 
 <div class="jumbotron">
 <h2>중고차 장기 렌트</h2>
@@ -191,6 +163,7 @@ function optest(){
 			</sql:query>
 		
       <div class="col-sm-3">
+    
       <select class="form-control" id="sellist2" name="sellist2" onchange="goDate2()"  >
         <option>차량 유형 선택</option>
         <option value="all" <c:if test="${param.sellist2=='all'}">selected</c:if>>전체</option>
@@ -215,7 +188,7 @@ function optest(){
       </c:if>
       
       <select class="form-control" id="sellist3" name="sellist3" >
-        <option disabled>차량 선택</option>
+        <option disabled>차량 선택 </option>
        <c:forEach var="row" items="${resultSet.rows}">
 				<option value="<c:out value="${row.carnum}"/>" <c:if test="${param.sellist3==row.carnum}">selected</c:if>><c:out value="${row.carnum}"/></option>
 				</c:forEach>
@@ -498,6 +471,7 @@ select * from (select * from member where fuel=? or fuel=?) where lentoffice=? o
 	<sql:query var="resultSet" dataSource="${dataSource}">
 	<c:set var="ff" value="${paramValues.example1[0]}"/>
      <c:set var="ff1" value="${paramValues.example1[1]}"/>
+   
 select * from (select * from member where facname=? and cartype=? and carnum=?) where  fuel=? or fuel=?
 	<sql:param value="${param.sellist1}"></sql:param>
 	<sql:param value="${param.sellist2}"></sql:param>

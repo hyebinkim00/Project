@@ -16,7 +16,7 @@ String carname=request.getParameter("carname");
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 .accordion {
-  background-color: #eee;
+  background-color: white;
   color: #444;
   cursor: pointer;
   padding: 18px;
@@ -29,7 +29,7 @@ String carname=request.getParameter("carname");
 }
 
 .active, .accordion:hover {
-  background-color: #ccc;
+  background-color: orange;
 }
 
 .accordion:after {
@@ -46,7 +46,6 @@ String carname=request.getParameter("carname");
 
 .panel {
   padding: 0 18px;
-  background-color: white;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-out;
@@ -69,28 +68,51 @@ border: 1px solid red;}
 			let testValue = document.getElementById("cntrTermMm1").value;
 
 			document.getElementById("result1").innerHTML = testValue;
+			
+			
 
 		}
 </script>
 
 <script type="text/javascript">
 
-		function checkTest2() {
+		function termtest(cmd) {
 
-			let testValue = document.getElementById("cntrTermMm2").value;
+			let testValue = document.getElementById(cmd).value;
 
 			document.getElementById("result2").innerHTML = testValue;
+			
+			document.getElementById("parpa2").value=testValue;
 
 		}
 </script>
 
 <script type="text/javascript">
 
-		function checkTest3() {
+		function servicetest(cmd) {
 
-			let testValue = document.getElementById("cntrTermMm3").value;
+			let testValue = document.getElementById(cmd).value;
 
 			document.getElementById("result3").innerHTML = testValue;
+			
+			document.getElementById("result3_1").innerHTML = testValue;
+			
+			document.getElementById("parpa3").value=testValue;
+
+		}
+</script>
+
+<script type="text/javascript">
+
+		function drivertest(cmd) {
+
+			let testValue = document.getElementById(cmd).value;
+
+			document.getElementById("result4").innerHTML = testValue;
+			
+			document.getElementById("result4_1").innerHTML = '<span>계약자를 포함한 '+ testValue + '  운전가능</span>';
+			
+			document.getElementById("parpa4").value=testValue;
 
 		}
 </script>
@@ -98,22 +120,25 @@ border: 1px solid red;}
 
 <script type="text/javascript">
 
-		function checkTest4() {
-			let testValue = document.getElementById("cntrTermMm4").value;
+		function deposittest(cmd) {
+			let testValue = document.getElementById(cmd).value;
+			 alert(testValue);
 			
 			let a = document.getElementById("price").value;
 			
-			alert(testValue);
+			alert(a);
 			
 			let d= a-(a* testValue);
 			
 			
 			alert(d);
 			
-			document.getElementById("mprice").value = d;
+			document.getElementById("parpa5").value = d;
 			
-			document.getElementById("result4").innerHTML=d+'원';
-			let o=document.getElementById("mprice").value;
+			document.getElementById("result5").innerHTML=d+'원';
+			
+			document.getElementById("result5_1").innerHTML = '<span>보증금을  '+ testValue + '  으로 납부</span>';
+			let o=document.getElementById("parpa5").value;
 			
 			alert(o);
 			
@@ -136,7 +161,7 @@ function go(){
 		</div>
 	</div>	
 	
-<div class="container">
+<div class="container col-sm-8">
 <h4>다이렉트 견적조회</h4>
 <hr style="border: solid 1px black " /> 
 
@@ -251,50 +276,71 @@ function go(){
 <hr style="border: solid 1px black " /> 
 
 
-<form method="post" action="shortTerm_payment_completed.jsp" name="userinput" >
+<form method="post" action="shortTerm_payment2.jsp" name="userinput" >
 
 <input type="hidden" id="car" name="car" value="${param.carname}">
 <input type="hidden" id="carn" name="carn" value="${car_name}">
 <input type="hidden" id="carof" name="carof" value="${lent_office}">
 
-<button type="button" class="accordion">계약 기간: &nbsp;&nbsp;&nbsp;<span id="result1"></span></button>
-<div class="panel"><span>차량 운행할수 있는 총 대여기간: &nbsp; &nbsp; &nbsp; &nbsp;</span>
-<select name="cntrTermMm1" id="cntrTermMm1" class="option01" onchange="checkTest1()" >
+<button type="button" class="accordion"><span class="col-sm-3"><strong>계약 기간</strong></span><span id="result1"></span></button>
+<div class="panel bg-light "><span class="col-sm-3"><br>차량 운행할수 있는 총 대여기간:</span>
+<select name="cntrTermMm1" id="cntrTermMm1" class="option01 col-sm-3" onchange="checkTest1()" >
 <c:forEach var="i" begin="1" end="${lentt}">
 <option value="<c:out value="${i}"/>개월"><c:out value="${i}"/>개월</option>	</c:forEach>
-
 </select>
+<br><br>
 </div>
 
-<button type="button" class="accordion">약정 주행거리: <span id="result2"></span></button> 
-<div class="panel"><span>계약기간 총 주행거리 초과 시 위약금 발생  </span>
-<select  name="cntrTermMm2" id="cntrTermMm2"  class="option02" onchange="checkTest2()" >
-<option value="월 2천 Km이하">월 2천 Km이하</option>	
-<option value="월 3천 Km이하">월 3천 Km이하</option>	
-<option value="월 4천 Km이하">월 4천 Km이하</option>
-</select>
+<button type="button" class="accordion"><span class="col-sm-3"><strong>약정 주행거리</strong></span> <span class="col-sm-3" id="result2" ></span></button> 
+<div class="panel bg-light">
+<span class="col-sm-4"><br>계약기간 총 주행거리 초과 시 위약금 발생</span>
+<span class="col-sm-2"></span>
+<input class =" col-sm-3 btn btn-outline-warning" type="button" id="lent_term1" name="lent_term1" value="2만  Km 이하" onclick="termtest('lent_term1')">
+<input class ="col-sm-3 btn btn-outline-warning" type="button" id="lent_term2" name="lent_term2" value="3만  Km 이하" onclick="termtest('lent_term2')">
+<input  id="parpa2" name="parpa2" type="hidden" value=" ">
+
+<br><br>
+
 </div>
 
-<button type="button" class="accordion">사고시 차량 대여  <span id="result3"></span></button> 
-<div class="panel"><span>사고 발생시 대차 서비스 </span>
-<select  name="cntrTermMm3" id="cntrTermMm3"  class="option03" onchange="checkTest3()" >
-<option value="yes">포함</option>	
-<option value="no">불 포함</option>	
-</select>
+<button type="button" class="accordion"><span class="col-sm-3"><strong>사고시 차량 대여</strong></span> <span class="col-sm-3" id="result3"></span></button> 
+<div class="panel bg-light">
+<span class="col-sm-2"><br>사고 발생시 대차 서비스  </span><span class="col-sm-2" id="result3_1"></span>
+ <span class="col-sm-2"></span> 
+<input class =" col-sm-3 btn btn-outline-warning" type="button" id="lent_service1" name="lent_service1" value="포함" onclick="servicetest('lent_service1')">
+<input class ="col-sm-3 btn btn-outline-warning" type="button" id="lent_service2" name="lent_service2" value="불포함" onclick="servicetest('lent_service2')">
+<input  id="parpa3" name="parpa3" type="hidden" value=" ">
+<br><br>
 </div>
 
-<button type="button" class="accordion">초기 납부 조건 </button> 
-<div class="panel"><span>보증금을 보증보험으로 대체(보증보험 수수료 발생) </span>
-<select  name="cntrTermMm4" id="cntrTermMm4"  class="option04" onchange="checkTest4()" >
-<option value="0">보증 보험</option>
-<option value="0.05">보증금 5%</option>	
-<option value="0.1">보증금 10%</option>	
-<option value="0.2">보증금 20%</option>
-</select>
+<button type="button" class="accordion"><span class="col-sm-3"><strong>운전자 범위</strong></span> <span class="col-sm-3" id="result4"></span></button> 
+<div class="panel bg-light">
+<span class="col-sm-4"><br><span class="col-sm-2" id="result4_1"></span> </span>
+<span class="col-sm-2"></span>
+<input class =" col-sm-2 btn btn-outline-warning" type="button" id="lent_driver1" name="lent_driver1" value="가족 한정" onclick="drivertest('lent_driver1')">
+<input class ="col-sm-2 btn btn-outline-warning" type="button" id="lent_driver2" name="lent_driver2" value="1인지정" onclick="drivertest('lent_driver2')">
+<input class ="col-sm-2 btn btn-outline-warning" type="button" id="lent_driver3" name="lent_driver3" value="누구나" onclick="drivertest('lent_driver3')">
+<input  id="parpa4" name="parpa4" type="hidden" value=" ">
+<br><br>
+</div>
+
+
+
+<button type="button" class="accordion"><span class="col-sm-3"><strong>초기 납부 조건</strong></span> <span class="col-sm-3" ></span> </button> 
+<div class="panel bg-light">
+<span class="col-sm-4"><br><span class="col-sm-2" id="result5_1"></span>  </span>
+<span class="col-sm-2"></span>
+<button class =" btn btn-outline-warning" type="button" id="lent_deposit1" name="lent_deposit1" value="0" onclick="deposittest('lent_deposit1')">보증 보험</button>
+<button class =" btn btn-outline-warning" type="button" id="lent_deposit2" name="lent_deposit2" value="0.1" onclick="deposittest('lent_deposit2')">보증금 10%</button>
+<button class =" btn btn-outline-warning" type="button" id="lent_deposit3" name="lent_deposit3" value="0.2" onclick="deposittest('lent_deposit3')">보증금 20%</button>
+<button class =" btn btn-outline-warning" type="button" id="lent_deposit4" name="lent_deposit4" value="0.3" onclick="deposittest('lent_deposit4')">보증금 30%</button>
+
+<input  id="parpa5" name="parpa5" type="hidden" value=" ">
+<br><br>
+</div>
 
 <input type="hidden" id="price" name="price" value="${car_price}">
-<input type="hidden" id="mprice" name="mprice">
-</div>
+
 
 
 
@@ -337,9 +383,9 @@ function go(){
   <div class="row d-flex p-3 bg-warning text-white ">  
     <div class="col-sm-4 p-2 bg-warning"><h5>월 렌탈료<br>(총 차량 구매가)</h5></div>
     <div class="col-sm-3 p-2 bg-warning"><br></div>
-    <div class="col-sm-2 p-2 bg-warning"><h5><span id="result4"><c:out value="${car_price}" />원</span><br><c:out value="${prices}" /></h5></div>
+    <div class="col-sm-2 p-2 bg-warning"><h5><span id="result5"><c:out value="${car_price}" />원</span><br><c:out value="${prices}" /></h5></div>
     <div class="col-sm-1 p-2 bg-warning"><br></div>
-    <div class="col-sm-2 p-2 bg-warning"><button class="btn btn-light" onclick="go()">지점방문<br>예약하기</button></div>
+    <div class="col-sm-2 p-2 bg-warning"><button style="color: white;" class="btn  border" onclick="go()">지점방문<br>예약하기</button></div>
   </div>
   
   

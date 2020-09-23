@@ -2,3 +2,12 @@
 9월 21, 2020 18:41:41.400 NEW SESSION
 9월 21, 2020 18:41:41.400 [2240:16068:0921/184141.395:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 5.1 s for first_image_paint 5.033 s
 9월 21, 2020 18:41:42.397 [2240:16068:0921/184142.396:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 5.1 s for first_image_paint 5.033 s
+
+9월 22, 2020 10:29:09.37 NEW SESSION
+9월 22, 2020 10:29:09.37 [11156:2604:0922/102909.017:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 3.014 s for first_image_paint 2.952 s
+9월 22, 2020 10:29:12.651 [11156:2604:0922/102912.651:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 3.014 s for first_image_paint 2.952 s
+9월 22, 2020 10:34:48.44 [15652:14008:0922/103448.043:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 1.72 s for first_image_paint 1.652 s
+9월 22, 2020 10:35:03.439 [15652:14008:0922/103503.439:ERROR:page_load_metrics_update_dispatcher.cc(165)] Invalid first_paint 1.72 s for first_image_paint 1.652 s
+
+9월 22, 2020 12:39:10.153 NEW SESSION
+9월 22, 2020 12:39:10.154 [7656:9968:0922/123910.146:ERROR:backend_impl.cc(1041)] Critical error found -8

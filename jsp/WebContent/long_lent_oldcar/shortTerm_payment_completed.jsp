@@ -10,9 +10,9 @@ String carn =request.getParameter("carn");
 String carof =request.getParameter("carof");
 String price =request.getParameter("mprice");
 String lent1 =request.getParameter("cntrTermMm1");
-String lent2 =request.getParameter("cntrTermMm2");
-String lent3 =request.getParameter("cntrTermMm3");
-String lent4 =request.getParameter("cntrTermMm4");
+String lent2 =request.getParameter("parpa2");
+String lent3 =request.getParameter("parpa3");
+String lent4 =request.getParameter("parpa4");
 
 %>
 
@@ -49,10 +49,10 @@ String lent4 =request.getParameter("cntrTermMm4");
 	Insert into  lent(car_num,user_id,lent_term,insurance,lent_car,service,totalprice,carn,lentoffice) values (?,'1',?,?,?,?,?,?,?)
 
 	<sql:param value="${param.car }" />
-	<sql:param value="${param.cntrTermMm1 }" />
-	<sql:param value="${param.cntrTermMm2 }" />
-	<sql:param value="${param.cntrTermMm3 }" />
-	<sql:param value="${param.cntrTermMm4 }" />
+	<sql:param value="${param.parpa1 }" />
+	<sql:param value="${param.parpa2 }" />
+	<sql:param value="${param.parpa3 }" />
+	<sql:param value="${param.parpa4 }" />
 	<sql:param value="${param.mprice }" />
 	<sql:param value="${param.carn }" />
 	<sql:param value="${param.carof }" />
